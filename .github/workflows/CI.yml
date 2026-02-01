@@ -10,11 +10,11 @@ jobs:
 
         steps:
             # github tự động clone responsibility của bạn về máy ảo 
-            - uses : actions/checkout@v4
+            - uses: actions/checkout@v4
             
             #
             - name: đăng nhập dockerhub 
-              run: docker login -u duonggquocc -p ${{secrects.PASS_DOCKER}}  
+              run: docker login -u duonggquocc -p ${{secrets.PASS_DOCKER}}  
 
             - name: Build Image Docker
               run: docker build -t duonggquocc/img-cyber_community:latest .
