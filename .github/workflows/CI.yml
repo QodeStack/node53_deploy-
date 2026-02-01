@@ -14,7 +14,7 @@ jobs:
             
             #
             - name: đăng nhập dockerhub 
-              run: docker login -u duonggquocc -p {{secrects.PASS_DOCKER}}  
+              run: docker login -u duonggquocc -p ${{secrects.PASS_DOCKER}}  
 
             - name: Build Image Docker
               run: docker build -t duonggquocc/img-cyber_community:latest .
