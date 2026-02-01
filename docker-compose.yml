@@ -1,0 +1,54 @@
+services:
+  #docker run --name node_mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -d mysql:latest
+
+  db-mysql:
+    container_name: con-db-mysql
+    image: mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=080706
+    ports:
+      - 3307:3306 
+  redis: 
+    container_name: con-redis 
+    image: redis:latest
+    ports:
+      - 6379:6379
+  #docker run --name es01 --net elastic -p 9200:9200 -it -m 1GB docker.elastic.co/elasticsearch/elasticsearch:9.2.4
+  elasticsearch:
+    container_name: con-elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:9.2.4
+    ports:
+      - 9200:9200
+    mem_limit: 1g
+  # docker run --name kib01 --net elastic -p 5601:5601 docker.elastic.co/kibana/kibana:9.2.4
+  kibana:
+    container_name: con-kibana
+    image: docker.elastic.co/kibana/kibana:9.2.4
+    ports:
+      - 5601:5601
+  rabbitmq:
+    container_name: con-rabbitmq
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: 080706 
+  be-cyber_community:
+    container_name: con-cyber_communityy
+    image: duonggquocc/img-cyber_community:latest
+    ports:
+      - 3070:3069
+    env_file:
+      - .env
+  be-email:
+      container_name: con-cyber-email
+      image: duonggquocc/img-cyber_email:latest
+      env_file:
+        - .env
+  be-order:
+      container_name: con-cyber-order
+      image: duonggquocc/img-cyber_order:latest
+      env_file:
+        - .env
